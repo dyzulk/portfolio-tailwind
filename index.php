@@ -531,6 +531,6 @@
     <!-- Back to top End -->
 
     <script src="dist/js/script.js"></script>
-    <script src="dist/js/submit.js"></script>
+    <script src="dist/js/kirim.js"></script>
   </body>
 </html>
