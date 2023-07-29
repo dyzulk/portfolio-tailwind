@@ -23,8 +23,8 @@
   	$botGrup = getenv('TELEGRAM_BOT_GRUP');
   	
   	// Kodekan nilai variabel untuk digunakan dalam JavaScript
-  	// $encodedBotToken = json_encode($botToken);
-  	// $encodedBotGrup = json_encode($botGrup);
+    $encodedBotToken = json_encode($botToken);
+  	$encodedBotGrup = json_encode($botGrup);
   	?>
   	    
   	<script>
