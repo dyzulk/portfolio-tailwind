@@ -339,7 +339,7 @@
           </div>
         </div>
 
-        <form action="https://nym.dyzulk.com/send_email.php" method="post">
+        <form action="https://mangga.eu.org/dyzulk-me/send_email.php" method="post">
           <div class="w-full lg:mx-auto lg:w-2/3">
             <div class="mb-6 w-full px-4">
               <label for="name" class="text-base font-bold text-primary">Nama</label>
@@ -518,5 +518,25 @@
     <script src="dist/js/script.js"></script>
     <script src="dist/js/ud-menu-scroll.js"></script>
     <script src="dist/js/submit.js"></script>
+    <script>
+        // Function to get URL parameters
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
+      
+        // Check if the URL parameter 'berhasil-dikirim' exists and its value is 'true'
+        var berhasilDikirim = getURLParameter('berhasil-dikirim');
+        if (berhasilDikirim === 'true') {
+            // Show 'Data berhasil dikirim' notification
+            window.alert('Data berhasil dikirim!');
+        }
+      
+        // Check if the URL parameter 'gagal-dikirim' exists and its value is 'true'
+        var gagalDikirim = getURLParameter('gagal-dikirim');
+        if (gagalDikirim === 'true') {
+            // Show 'Data gagal dikirim' notification
+            window.alert('Data gagal dikirim!');
+        }
+    </script>
   </body>
 </html>
