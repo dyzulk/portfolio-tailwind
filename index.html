@@ -17,6 +17,7 @@
         document.documentElement.classList.remove('dark');
       }
     </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb" async defer></script>
   </head>
   <body>
     <!-- Header Start -->
@@ -343,40 +344,38 @@
           <div class="w-full lg:mx-auto lg:w-2/3">
             <div class="mb-6 w-full px-4">
               <label for="name" class="text-base font-bold text-primary">Nama</label>
-              <input type="text" name="nama" id="name" class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
+              <input type="text" name="nama" id="name" required class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div class="mb-6 w-full px-4">
               <label for="email" class="text-base font-bold text-primary">Email</label>
-              <input type="email" name="email" id="email" class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
+              <input type="email" name="email" id="email" required class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div class="mb-6 w-full px-4">
               <label for="subject" class="text-base font-bold text-primary">Subjek</label>
-              <input type="text" name="subject" id="subject" class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
+              <input type="text" name="subject" id="subject" required class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div class="mb-6 w-full px-4">
               <label for="message" class="text-base font-bold text-primary">Pesan</label>
-              <textarea type="email" name="pesan" id="message" class="h-32 w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+              <textarea type="email" name="pesan" id="message" required class="h-32 w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
             </div>
-            <div class="w-full px-4">
-              <button type="submit" class="w-full rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-500 hover:opacity-80 hover:shadow-lg">Kirim</button>
+            <div class="flex justify-center items-center min-h-screen mb-6 bg-gray-100">
+              <!-- The Turnstile widget will be injected in the following div. -->
+              <div class="mx-auto" id="myWidget"></div>
+              <!-- end. -->
+            </div>
+            <div class="flex justify-center items-center min-h-screen w-full mb-6 px-4">
+              <button type="submit" class="w-2/5 rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-500 hover:opacity-80 hover:shadow-lg">Kirim</button>
             </div>
           </div>
         </form>
-      </div>
-    </section>
-    <!-- Contact Section End -->
-
-    <!-- Maps Start -->
-    <section class="pt-24 pb-12 bg-radagelap">
-      <div class="container">
-        <div class="flex flex-wrap">
-          <div class="m-auto w-full rounded-3xl">
+        <div class="w-full mt-96">
+          <div class="w-2/5 rounded-3xl">
             <iframe class="overflow-auto rounded-3xl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.1851094133394!2d108.36259749999999!3d-6.498234300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ec36c5d3a70f9%3A0x7ae03457d77ea7c5!2sDyzulk%20-%20Seinjak%20%26%20Sejejak!5e0!3m2!1sid!2sid!4v1646790899934!5m2!1sid!2sid" width="100%" height="450" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>
       </div>
     </section>
-    <!-- Maps End -->
+    <!-- Contact Section End -->
 
     <!-- Footer Start -->
     <footer class="bg-dark pt-24 pb-12">
@@ -519,24 +518,16 @@
     <script src="dist/js/ud-menu-scroll.js"></script>
     <script src="dist/js/submit.js"></script>
     <script>
-        // Function to get URL parameters
-        function getURLParameter(name) {
-            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-        }
+      // This function is called when the Turnstile script is loaded and ready to be used.
+      // The function name matches the "onload=..." parameter.
+      function _turnstileCb() {
+          console.debug('_turnstileCb called');
       
-        // Check if the URL parameter 'berhasil-dikirim' exists and its value is 'true'
-        var berhasilDikirim = getURLParameter('berhasil-dikirim');
-        if (berhasilDikirim === 'true') {
-            // Show 'Data berhasil dikirim' notification
-            window.alert('Data berhasil dikirim!');
-        }
-      
-        // Check if the URL parameter 'gagal-dikirim' exists and its value is 'true'
-        var gagalDikirim = getURLParameter('gagal-dikirim');
-        if (gagalDikirim === 'true') {
-            // Show 'Data gagal dikirim' notification
-            window.alert('Data gagal dikirim!');
-        }
-    </script>
+          turnstile.render('#myWidget', {
+            sitekey: '0x4AAAAAAAIMPEU0uylSAyt_',
+            theme: 'auto',
+          });
+      }
+      </script>
   </body>
 </html>
